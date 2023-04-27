@@ -1,25 +1,42 @@
-// import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Navbar } from "./components/navbar";
+import { Shop } from "./pages/shop/shop";
+import { Cart } from "./pages/cart/cart";
+import { ShopContextProvider } from "./context/shop-context";
+import { ShopAddtoCart } from "./pages/shopAddtoCart/shopAddtoCart";
+import Login from "./pages/login/login";
+import Register from "./pages/register/register";
+import EditAdmin from "./pages/admin/editProfileAdmin/editProfileAdmin";
+import { EditProduct } from "./pages/admin/editProduct/editProduct";
+import StripeContainer from "./pages/Payment/StripeContainer";
 
 function App() {
-  return (
+  return(
     <div className="App">
-      <header className="App-header">
-        {/* <img src={logo} className="App-logo" alt="logo" /> */}
-        <p>
-          Estoy probando funciones front
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ShopContextProvider>
+        <Router>
+          <Navbar />
+          <Routes>
+            {/* ruta principal */}
+            <Route path="/" element={<Shop />}/> 
+            {/* ruta principal con logeo  */}
+            <Route path="/shop" element={<ShopAddtoCart />}/> 
+            <Route path="/cart" element={<Cart />}/>
+            <Route path="/login" element={<Login />}/>
+            <Route path="/register" element={<Register />}/>
+            <Route path="/editAdmin" element={<EditAdmin />}/>
+            <Route path="/editInventory" element={<EditProduct />}/> 
+            <Route path="/stripe" element={<StripeContainer />}/> 
+          </Routes>
+        </Router>
+      </ShopContextProvider>
     </div>
-  );
-}
+  )
+};
 
 export default App;
+
+
+
+
